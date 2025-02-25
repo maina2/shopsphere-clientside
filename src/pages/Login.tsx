@@ -17,7 +17,7 @@ const Login = () => {
     e.preventDefault();
     try {
       await loginUser(username,email, password);
-      navigate("/"); // Redirect to homepage after login
+      navigate("/home"); // Redirect to homepage after login
     } catch (error) {
       console.error("Login error:", error);
       alert("Invalid credentials. Please try again.");

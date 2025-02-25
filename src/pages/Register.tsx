@@ -1,8 +1,8 @@
 import  { useState } from "react";
-import { registerUser, register } from '../services/authService';
+// import { registerUser, register } from '../services/authService';
 import { useNavigate } from "react-router-dom";
 import "../styles/register.css"; 
-import { useAuth } from "../context/AuthContext";
+// import { useAuth } from "../context/AuthContext";
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -16,7 +16,7 @@ const Register = () => {
   const [error, setError] = useState<string | null>(null);
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
-  const {register}= useAuth()
+  // const {register}= useAuth()
   const navigate = useNavigate();
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
