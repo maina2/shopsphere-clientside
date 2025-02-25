@@ -1,28 +1,21 @@
 import  { useState } from "react";
-// import { registerUser, register } from '../services/authService';
 import { useNavigate } from "react-router-dom";
 import "../styles/register.css"; 
-// import { useAuth } from "../context/AuthContext";
+import { useAuth } from "../context/AuthContext";
 
 const Register = () => {
-  const [formData, setFormData] = useState({
-    username: "",
-    email: "",
-    password: "",
-    firstName: "",
-    lastName: ""
-  });
-
+  const [firstname, setFirstname] = useState("");
+  const [lastname, setLastname] = useState("");
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
-  // const {register}= useAuth()
+  const {registerUser}= useAuth()
   const navigate = useNavigate();
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { id, value } = e.target;
-    setFormData(prev => ({ ...prev, [id]: value }));
-  };
+
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -31,11 +24,7 @@ const Register = () => {
     setIsLoading(true);
 
     try {
-      await registerUser({
-        ...formData,
-        first_name: formData.firstName,
-        last_name: formData.lastName
-      });
+      await registerUser(username, email, password );
       setSuccessMessage("Registration successful! Redirecting...");
       setTimeout(() => navigate("/login"), 1500);
     } catch (err: any) {
@@ -67,8 +56,8 @@ const Register = () => {
                 id="firstName"
                 type="text"
                 className="auth-input"
-                value={formData.firstName}
-                onChange={handleInputChange}
+                value={firstname}
+                onChange={(e)=>setFirstname(e.target.value)}
                 placeholder="John"
                 required
               />
@@ -81,8 +70,8 @@ const Register = () => {
                 id="lastName"
                 type="text"
                 className="auth-input"
-                value={formData.lastName}
-                onChange={handleInputChange}
+                value={lastname}
+                onChange={(e)=>setLastname(e.target.value)}
                 placeholder="Doe"
                 required
               />
@@ -96,8 +85,8 @@ const Register = () => {
               id="username"
               type="text"
               className="auth-input"
-              value={formData.username}
-              onChange={handleInputChange}
+              value={username}
+              onChange={(e)=>setUsername(e.target.value)}
               placeholder="johndoe123"
               required
             />
@@ -110,8 +99,8 @@ const Register = () => {
               id="email"
               type="email"
               className="auth-input"
-              value={formData.email}
-              onChange={handleInputChange}
+              value={email}
+              onChange={(e)=>setEmail(e.target.value)}
               placeholder="john@example.com"
               required
             />
@@ -124,8 +113,8 @@ const Register = () => {
               id="password"
               type="password"
               className="auth-input"
-              value={formData.password}
-              onChange={handleInputChange}
+              value={password}
+              onChange={(e)=>setPassword(e.target.value)}
               placeholder="••••••••"
               required
             />

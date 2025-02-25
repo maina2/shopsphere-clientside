@@ -37,9 +37,9 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     localStorage.setItem("user", JSON.stringify(data.user));
   };
 
-  const registerUser = async (username:string,email: string, password: string)=>{
+  const registerUser = async (userData: { username: string; email: string; password: string })=>{
         try {
-            const data= await register(username,email, password);
+            const data= await register(userData);
             localStorage.setItem("access",data.access)
             setToken(data.access)
             setUser(data.user)
