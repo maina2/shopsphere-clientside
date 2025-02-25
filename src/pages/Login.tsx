@@ -1,33 +1,26 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import { login } from "../services/authService";
+import { useAuth } from "../context/AuthContext";
 import '../styles/login.css'
+
+
 
 const Login = () => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const { loginUser } = useAuth();
+
   const navigate = useNavigate();
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const data = await login(username, email, password);
-  
-      // Check if both access and refresh tokens are returned
-      if (data.access && data.refresh) {
-        // Store tokens in localStorage
-        localStorage.setItem("access", data.access);
-        localStorage.setItem("refresh", data.refresh);
-  
-        // Redirect to home page
-        navigate("/home");
-      } else {
-        alert("Invalid credentials. Please try again.");
-      }
+      await loginUser(username,email, password);
+      navigate("/"); // Redirect to homepage after login
     } catch (error) {
       console.error("Login error:", error);
-      alert("Login failed. Check your details.");
+      alert("Invalid credentials. Please try again.");
     }
   };
 
