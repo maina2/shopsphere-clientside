@@ -5,9 +5,11 @@ import { Link } from "react-router-dom";
 import "../styles/home.css";
 import Categories from "../components/Categories";
 import Navbar from "../components/Navbar"; // Import the Navbar component
+import { useAuth } from "../context/AuthContext";
 
 const Home: React.FC = () => {
   const [featuredProducts, setFeaturedProducts] = useState<Product[]>([]);
+  const {user} = useAuth()
 
   useEffect(() => {
     getProducts().then((data: Product[]) => {
@@ -25,7 +27,8 @@ const Home: React.FC = () => {
       {/* Header Section */}
       <header className="header">
         <div className="header-content">
-          <h1>Welcome to ShopSphere</h1>
+          
+          <h1> {user?.first_name}, welcome to ShopSphere</h1>
           <p>Your one-stop shop for everything you need</p>
           <div className="search-bar">
             <input type="text" placeholder="Search products..." />

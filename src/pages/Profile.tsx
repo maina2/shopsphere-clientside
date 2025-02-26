@@ -16,7 +16,8 @@ const Profile = () => {
 
   return (
     <div>
-      <h2>Welcome, {user.firstname}!</h2>
+      <h2>{user.first_name}{user.last_name}</h2>
+      <h3>{user.username}</h3>
       <p>Email: {user.email}</p>
       <button onClick={handleLogout}>Logout</button>
     </div>

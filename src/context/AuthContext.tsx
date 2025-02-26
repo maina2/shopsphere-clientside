@@ -3,10 +3,10 @@ import { login as loginService, logout as logoutService, getUserProfile, registe
 
 interface User {
   id: number;
+  first_name:string;
+  last_name:string;
   username: string;
   email: string;
-  firstname:string;
-  lastname:string;
 }
 
 interface AuthContextType {
@@ -14,7 +14,7 @@ interface AuthContextType {
   token: string | null;
   loginUser: (username:string,email: string, password: string) => Promise<void>;
   logoutUser: () => void;
-  registerUser:(username:string,email: string, password: string)=>Promise<void>;
+  registerUser:(first_name:string,last_name:string,username:string,email: string, password: string)=>Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -39,9 +39,9 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     localStorage.setItem("user", JSON.stringify(data.user));
   };
 
-  const registerUser = async (username:string,email: string, password: string)=>{
+  const registerUser = async (first_name:string,last_name:string,username:string,email: string, password: string)=>{
         try {
-            const data= await register(username,email, password);
+            const data= await register(first_name,last_name,username,email, password);
             localStorage.setItem("access",data.access)
             setToken(data.access)
             setUser(data.user)

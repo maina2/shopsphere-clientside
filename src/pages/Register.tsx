@@ -4,8 +4,8 @@ import "../styles/register.css";
 import { useAuth } from "../context/AuthContext";
 
 const Register = () => {
-  const [firstname, setFirstname] = useState("");
-  const [lastname, setLastname] = useState("");
+  const [first_name, setFirstname] = useState("");
+  const [last_name, setLastname] = useState("");
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -24,7 +24,7 @@ const Register = () => {
     setIsLoading(true);
 
     try {
-      await registerUser(username, email, password );
+      await registerUser(first_name,last_name,username, email, password );
       setSuccessMessage("Registration successful! Redirecting...");
       setTimeout(() => navigate("/login"), 1500);
     } catch (err: any) {
@@ -56,7 +56,7 @@ const Register = () => {
                 id="firstName"
                 type="text"
                 className="auth-input"
-                value={firstname}
+                value={first_name}
                 onChange={(e)=>setFirstname(e.target.value)}
                 placeholder="John"
                 required
@@ -70,7 +70,7 @@ const Register = () => {
                 id="lastName"
                 type="text"
                 className="auth-input"
-                value={lastname}
+                value={last_name}
                 onChange={(e)=>setLastname(e.target.value)}
                 placeholder="Doe"
                 required
