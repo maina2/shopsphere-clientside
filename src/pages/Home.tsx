@@ -70,7 +70,7 @@ const Home: React.FC = () => {
 
       {/* Footer Section */}
       <footer className="footer">
-        <p>&copy; 2025 ShopSphere. All rights reserved.</p>
+        <p>&copy; 2025 ShopSphere. Simon Maina.</p>
       </footer>
     </div>
   );
