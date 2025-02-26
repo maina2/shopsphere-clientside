@@ -22,6 +22,7 @@ export const getUserProfile = async () => {
   return response.data;
 };
 
+
 export const logout = () => {
   localStorage.removeItem("access");
   localStorage.removeItem("user");
