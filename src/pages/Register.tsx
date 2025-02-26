@@ -38,8 +38,8 @@ const Register = () => {
     <div className="auth-page-container">
       <div className="auth-card">
         <div className="auth-header">
-          <h2 className="auth-title">Join Our Community</h2>
-          <p className="auth-subtitle">Start your journey with us</p>
+          <h2 className="auth-title">Join ShopSphere today!</h2>
+          <p className="auth-subtitle">Start your  shopping journey with us</p>
         </div>
 
         <form onSubmit={handleSubmit} className="auth-form">

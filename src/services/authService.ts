@@ -2,7 +2,7 @@ import api from "./api"; // Assumes you have an Axios instance configured
 
 interface LoginResponse {
   access: string;
-  user: { id: number; username: string; email: string };
+  user: { id: number;firstname:string; lastname:string; username: string; email: string };
 }
 
 
@@ -12,8 +12,8 @@ export const login = async (username: string,email: string, password: string): P
 };
 
 
-export const register = async (userData: { username: string; email: string; password: string }) => {
-  const response = await api.post("/users/register/", { userData });
+export const register = async (username: string,email: string, password: string) => {
+  const response = await api.post("/users/register/",{username, email, password });
   return response.data;
 };
 

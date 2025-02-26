@@ -5,6 +5,8 @@ interface User {
   id: number;
   username: string;
   email: string;
+  firstname:string;
+  lastname:string;
 }
 
 interface AuthContextType {
@@ -37,9 +39,9 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     localStorage.setItem("user", JSON.stringify(data.user));
   };
 
-  const registerUser = async (userData: { username: string; email: string; password: string })=>{
+  const registerUser = async (username:string,email: string, password: string)=>{
         try {
-            const data= await register(userData);
+            const data= await register(username,email, password);
             localStorage.setItem("access",data.access)
             setToken(data.access)
             setUser(data.user)
