@@ -1,31 +1,14 @@
-import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { getCategories } from "../services/categoriesService";
 import "../styles/categories.css";
+import { useCategories } from "../context/CategoriesContext";
 
 // Define the Category interface
-interface Category {
-  id: number;
-  name: string;
-  image?: string; // Make image optional with ?
-}
 
 const Categories = () => {
   // Specify the type of state as Category array
-  const [categories, setCategories] = useState<Category[]>([]);
 
-  useEffect(() => {
-    const fetchCategories = async () => {
-      try {
-        const data = await getCategories();
-        setCategories(data);
-      } catch (error) {
-        console.error("Failed to fetch categories:", error);
-      }
-    };
+  const {categories} = useCategories()
 
-    fetchCategories();
-  }, []);
 
   return (
     <section className="categories">

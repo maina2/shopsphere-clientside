@@ -1,4 +1,4 @@
-import { useState,useContext,useEffect, createContext, ReactNode } from 'react';
+import { useState, useContext, useEffect, createContext, ReactNode } from 'react';
 import { getCategories, getProductByCategories } from '../services/categoriesService';
 import { Category } from "../types/Category";
 
@@ -6,8 +6,7 @@ import { Category } from "../types/Category";
 interface CategoriesContextType {
     categories:Category[];
     categoriesProducts:Category[];
-    fetchCategories : ()=>Promise<void>;
-    fetchCategoryProducts:()=>Promise<void>;
+    fetchData:()=>Promise<void>
     loading: boolean;
     error: string | null;
 
@@ -23,47 +22,34 @@ export const CategoriesProvider = ({children}:{children:ReactNode})=>{
 
 
 
-    
-const fetchCategories= async()=>{
+const fetchData = async () =>{
     setLoading(true)
     try {
-        const allCategories = await getCategories()
-        setCategories(allCategories)
-        setError(null)
-    } catch (err) {
-        setError("Failed to fetch categories")
-        console.error(err)
-        
-    }finally{
-        setLoading(false);
-    }
-}
+        const data = await getCategories()
 
-const fetchCategoryProducts = async()=>{
-    setLoading(true)
-    try {
-        const productsByCategory = await getProductByCategories()
-        setCategoriesProducts(productsByCategory)
+        const getProductsByCategories = await getProductByCategories()
+        setCategories(data)
+        setCategoriesProducts(getProductsByCategories)
         
     } catch (err) {
-        setError("Failed to fetch all the products")
+        setError("Error fetching categories")
         console.error(err)
         
     }finally{
         setLoading(false)
     }
 
-}
+    
+} 
 
-useEffect (()=>{
-    fetchCategories();
-    fetchCategoryProducts();
-
-
+useEffect(()=>{
+    
+fetchData()
 },[])
 
+
     return(
-        <CategoryContext.Provider value={{categories,categoriesProducts, loading, error, fetchCategories,fetchCategoryProducts}}>
+        <CategoryContext.Provider value={{categories,categoriesProducts, loading, error,fetchData}}>
             {children}
         </CategoryContext.Provider>
     )
