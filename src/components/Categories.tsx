@@ -2,13 +2,8 @@ import { Link } from "react-router-dom";
 import "../styles/categories.css";
 import { useCategories } from "../context/CategoriesContext";
 
-// Define the Category interface
-
 const Categories = () => {
-  // Specify the type of state as Category array
-
-  const { categories, categoriesProducts, loading, error, fetchData } = useCategories();
-
+  const { categories, fetchCategoryProducts } = useCategories();
 
   return (
     <section className="categories">
@@ -19,7 +14,7 @@ const Categories = () => {
             key={category.id}
             to={`/categories/${category.id}/products`}
             className="category-card"
-            onClick={() => fetchData(`${category.id}`)}
+            onClick={() => fetchCategoryProducts(category.id)} // Use fetchCategoryProducts
           >
             {category.image && (
               <img

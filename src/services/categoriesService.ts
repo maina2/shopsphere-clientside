@@ -6,7 +6,7 @@ export const getCategories = async () =>{
     return response.data
 }
 
-export const getProductByCategories = async (id:string) =>{
+export const getProductByCategories = async (id:number) =>{
     const response = await api.get(`/products/categories/${id}/products/`);
     return response.data
 }

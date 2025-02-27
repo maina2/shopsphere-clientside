@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getProductById } from "../services/productsServices";
-import { useCart } from "../context/CartContext"; // Import useCart
-import "../styles/productDetails.css"; // Import the CSS file
+import { useCart } from "../context/CartContext";
+import "../styles/productDetails.css";
 import Navbar from "../components/Navbar";
 
 const ProductDetails = () => {
@@ -10,13 +10,15 @@ const ProductDetails = () => {
   const [product, setProduct] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
-  const { addItem } = useCart(); // Use the addItem function from the context
+  const { addItem } = useCart();
 
   useEffect(() => {
+    if (!id) return; // Exit if `id` is undefined
+
     const fetchProduct = async () => {
       try {
         const data = await getProductById(id);
-        setProduct(data);
+        if (data) setProduct(data); // Only update state if data is valid
       } catch (err) {
         setError("Failed to load product details.");
       } finally {
@@ -42,6 +44,7 @@ const ProductDetails = () => {
 
   if (loading) return <p className="loading">Loading...</p>;
   if (error) return <p className="error">{error}</p>;
+  if (!product) return <p className="error">Product not found.</p>;
 
   return (
     <div className="product-details-container">

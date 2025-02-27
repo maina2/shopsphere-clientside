@@ -3,31 +3,31 @@ import { useParams, Link } from 'react-router-dom';
 import { useCategories } from '../context/CategoriesContext';
 import { Product } from '../types/Product'; // Assuming you have a Product type
 import '../styles/categoryproducts.css';
+import { getProductById } from '../services/productsServices';
 
 const CategoryProducts = () => {
-  const { id } = useParams<{ id: string }>();
-  const { categoriesProducts, fetchData, loading, error } = useCategories();
+  const { id } = useParams();
+  const { categories, categoriesProducts, fetchCategoryProducts, loading, error } = useCategories();
   const [currentCategory, setCurrentCategory] = useState<string>('');
 
+
   useEffect(() => {
-    if (id) {
-      fetchData(id);
-      
-      // Get the current category name from the fetched category products
-      if (categoriesProducts && categoriesProducts.length > 0) {
-        setCurrentCategory(categoriesProducts[0].name || 'Products');
-      }
+    if (!id) return; // Exit if `id` is undefined
+    setLoading(true)
+    const fetchCategoryProducts = async ()=>{
+        
+        try {
+            const products = await getProductById(id)
+        } catch (err) {
+
+        }finally{
+        }
+
+
+        fetchCategoryProducts()
+
     }
-  }, [id, fetchData,categoriesProducts]);
-
-  if (loading) {
-    return <div className="loading-container">Loading products...</div>;
-  }
-
-  if (error) {
-    return <div className="error-container">Error: {error}</div>;
-  }
-
+  
   return (
     <div className="category-products-container">
       <div className="category-header">
@@ -46,7 +46,7 @@ const CategoryProducts = () => {
                   <img 
                     src={product.image} 
                     alt={product.name} 
-                    className="product-image" 
+                    className="category-product-image" 
                   />
                 )}
               </div>
