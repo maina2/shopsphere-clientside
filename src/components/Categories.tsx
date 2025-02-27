@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { getCategories } from "../services/productsServices";
+import { getCategories } from "../services/categoriesService";
 import "../styles/categories.css";
 
 // Define the Category interface
