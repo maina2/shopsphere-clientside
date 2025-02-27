@@ -7,6 +7,7 @@ import Cart from "./pages/Cart";
 import ProductDetails from "./pages/ProductDetails";
 import Profile from "./pages/Profile";
 import ProtectedRoute from "./components/ProtectedRoute";
+import CategoryProducts from "./pages/CategoryProducts";
 function App() {
   return (
     <>
@@ -21,6 +22,7 @@ function App() {
             <Route path="/cart" element={<Cart />} />
             <Route path="/products/:id" element={<ProductDetails />} />
             <Route path="/profile" element={<Profile />} />
+            <Route path="/products/:id" element={<CategoryProducts />} />
           </Route>
         </Routes>
       </BrowserRouter>

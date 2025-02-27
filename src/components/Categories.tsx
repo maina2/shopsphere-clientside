@@ -7,7 +7,7 @@ import { useCategories } from "../context/CategoriesContext";
 const Categories = () => {
   // Specify the type of state as Category array
 
-  const {categories} = useCategories()
+  const { categories, categoriesProducts, loading, error, fetchData } = useCategories();
 
 
   return (
@@ -19,6 +19,7 @@ const Categories = () => {
             key={category.id}
             to={`/categories/${category.id}/products`}
             className="category-card"
+            onClick={() => fetchData(`${category.id}`)}
           >
             {category.image && (
               <img
