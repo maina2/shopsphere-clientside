@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getProductByCategories } from "../services/categoriesService"; // Import the service
 import "../styles/categoryProducts.css"; // Import the CSS file
+import Navbar from '../components/Navbar';
 
 const CategoryProductsPage = () => {
   const { id } = useParams<{ id: string }>(); // Get category ID from the URL
@@ -40,7 +41,10 @@ const CategoryProductsPage = () => {
   }
 
   return (
-    <div className="category-products-page">
+    <div className="home-page">
+      <Navbar/>
+      <div className="category-products-page">
+      
       <h1>Products in This Category</h1>
       <div className="product-list">
         {categoryProducts.map((product) => (
@@ -57,6 +61,7 @@ const CategoryProductsPage = () => {
           </div>
         ))}
       </div>
+    </div>
     </div>
   );
 };
