@@ -8,25 +8,7 @@ import { getProductById } from '../services/productsServices';
 const CategoryProducts = () => {
   const { id } = useParams();
   const { categories, categoriesProducts, fetchCategoryProducts, loading, error } = useCategories();
-  const [currentCategory, setCurrentCategory] = useState<string>('');
 
-
-  useEffect(() => {
-    if (!id) return; // Exit if `id` is undefined
-    setLoading(true)
-    const fetchCategoryProducts = async ()=>{
-        
-        try {
-            const products = await getProductById(id)
-        } catch (err) {
-
-        }finally{
-        }
-
-
-        fetchCategoryProducts()
-
-    }
   
   return (
     <div className="category-products-container">
@@ -76,6 +58,6 @@ const CategoryProducts = () => {
       )}
     </div>
   );
-};
+};)
 
 export default CategoryProducts;
