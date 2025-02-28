@@ -8,5 +8,5 @@ export const getCategories = async () =>{
 
 export const getProductByCategories = async (id: string) => {
     const response = await api.get(`/products/categories/${id}/products/`);
-    return Array.isArray(response.data) ? response.data : []; // Ensure the response is an array
+    return response.data.products || []; // Extract the `products` array
   };
