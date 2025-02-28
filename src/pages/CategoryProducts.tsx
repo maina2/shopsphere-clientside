@@ -1,63 +1,45 @@
-import React, { useEffect, useState } from 'react';
-import { useParams, Link } from 'react-router-dom';
-import { useCategories } from '../context/CategoriesContext';
-import { Product } from '../types/Product'; // Assuming you have a Product type
-import '../styles/categoryproducts.css';
-import { getProductById } from '../services/productsServices';
+import React, { useEffect } from "react";
+import { useParams } from "react-router-dom";
+import { useCategories } from "../context/CategoriesContext";
+import "../styles/categoryProducts.css";
 
-const CategoryProducts = () => {
-  const { id } = useParams();
-  const { categories, categoriesProducts, fetchCategoryProducts, loading, error } = useCategories();
+const CategoryProductsPage = () => {
+  const { id } = useParams<{ id: string }>(); // Get category ID from the URL
+  const { categoryProducts, fetchCategoryProducts, loading, error } = useCategories();
 
-  
+  // Fetch products for the specific category when the component mounts or `id` changes
+  useEffect(() => {
+    if (!id) return; // Exit if `id` is undefined
+
+    fetchCategoryProducts(id);
+  }, [id, fetchCategoryProducts]);
+
+  if (loading) return <p className="loading">Loading products...</p>;
+  if (error) return <p className="error">{error}</p>;
+  if (!Array.isArray(categoryProducts) || categoryProducts.length === 0) {
+    return <p>No products found in this category.</p>;
+  }
+
   return (
-    <div className="category-products-container">
-      <div className="category-header">
-        <h1>{currentCategory}</h1>
-        <Link to="/categories" className="back-link">
-          ← Back to Categories
-        </Link>
+    <div className="category-products-page">
+      <h1>Products in This Category</h1>
+      <div className="product-list">
+        {categoryProducts.map((product) => (
+          <div key={product.id} className="product-card">
+            <img
+              src={product.image}
+              alt={product.name}
+              className="product-image"
+            />
+            <h3>{product.name}</h3>
+            <p className="price">${product.price.toFixed(2)}</p>
+            <p className="description">{product.description}</p>
+            <button className="add-to-cart-button">Add to Cart</button>
+          </div>
+        ))}
       </div>
-
-      {categoriesProducts && categoriesProducts.length > 0 ? (
-        <div className="products-grid">
-          {categoriesProducts.map((product) => (
-            <div key={product.id} className="product-card">
-              <div className="product-image-container">
-                {product.image && (
-                  <img 
-                    src={product.image} 
-                    alt={product.name} 
-                    className="category-product-image" 
-                  />
-                )}
-              </div>
-              <div className="product-info">
-                <h3 className="product-name">{product.name}</h3>
-                <p className="product-price">${product.price.toFixed(2)}</p>
-                <p className="product-description">{product.description}</p>
-                <div className="product-actions">
-                  <Link 
-                    to={`/products/${product.id}`} 
-                    className="view-details-btn"
-                  >
-                    View Details
-                  </Link>
-                  <button className="add-to-cart-btn">
-                    Add to Cart
-                  </button>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-      ) : (
-        <div className="no-products">
-          <p>No products found in this category.</p>
-        </div>
-      )}
     </div>
   );
-};)
+};
 
-export default CategoryProducts;
+export default CategoryProductsPage;
