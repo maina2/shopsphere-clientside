@@ -50,16 +50,23 @@ export const ProfileProvider = ({ children }: { children: ReactNode }) => {
       let response;
       if (file) {
         const formData = new FormData();
-        formData.append("profile_picture", file);
+        formData.append("profile_picture", file); // Append the file
+  
+        // Append other fields to FormData
         Object.entries(updatedData).forEach(([key, value]) => {
-          formData.append(key, value);
+          if (value !== undefined) {
+            // Convert non-string values to strings
+            formData.append(key, value.toString());
+          }
         });
+  
         response = await api.put("/users/profile/", formData, {
           headers: {
             "Content-Type": "multipart/form-data",
           },
         });
       } else {
+        // If no file is provided, send a regular JSON payload
         response = await api.put("/users/profile/", updatedData);
       }
       setProfile(response.data);
