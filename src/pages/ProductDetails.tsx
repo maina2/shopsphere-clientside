@@ -21,6 +21,7 @@ const ProductDetails = () => {
         if (data) setProduct(data); // Only update state if data is valid
       } catch (err) {
         setError("Failed to load product details.");
+        console.error(err)
       } finally {
         setLoading(false);
       }
