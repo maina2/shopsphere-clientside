@@ -84,8 +84,9 @@ const Profile = () => {
       {editMode ? (
         <form className="edit-form" onSubmit={handleSubmit}>
           <div>
-            <label>First Name</label>
+            <label htmlFor="firstname">First Name</label>
             <input
+              id="firstname"
               type="text"
               name="first_name"
               value={formData.first_name}
@@ -93,8 +94,9 @@ const Profile = () => {
             />
           </div>
           <div>
-            <label>Last Name</label>
+            <label htmlFor="lastname">Last Name</label>
             <input
+              id="lastname"
               type="text"
               name="last_name"
               value={formData.last_name}
@@ -102,8 +104,9 @@ const Profile = () => {
             />
           </div>
           <div>
-            <label>Username</label>
+            <label htmlFor="username">Username</label>
             <input
+              id="username"
               type="text"
               name="username"
               value={formData.username}
@@ -111,8 +114,9 @@ const Profile = () => {
             />
           </div>
           <div>
-            <label>Email</label>
+            <label htmlFor="email">Email</label>
             <input
+              id="email"
               type="email"
               name="email"
               value={formData.email}
@@ -120,16 +124,19 @@ const Profile = () => {
             />
           </div>
           <div>
-            <label>Bio</label>
+            <label htmlFor="bio">Bio</label>
             <textarea
+
+              id="bio"
               name="bio"
               value={formData.bio}
               onChange={handleInputChange}
             />
           </div>
           <div>
-            <label>Phone</label>
+            <label htmlFor="phone">Phone</label>
             <input
+              id="phone"
               type="text"
               name="phone"
               value={formData.phone}
@@ -137,8 +144,9 @@ const Profile = () => {
             />
           </div>
           <div>
-            <label>Profile Picture</label>
+            <label htmlFor="pp">Profile Picture</label>
             <input
+            id="pp"
               type="file"
               accept="image/*"
               onChange={handleFileChange}

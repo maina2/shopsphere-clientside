@@ -3,7 +3,7 @@ import "../styles/categories.css";
 import { useCategories } from "../context/CategoriesContext";
 
 const Categories = () => {
-  const { categories, fetchCategoryProducts } = useCategories();
+  const { categories } = useCategories();
 
   return (
     <section className="categories">
@@ -14,7 +14,6 @@ const Categories = () => {
             key={category.id}
             to={`/categories/${category.id}/products`}
             className="category-card"
-            onClick={() => fetchCategoryProducts(category.id)} // Use fetchCategoryProducts
           >
             {category.image && (
               <img

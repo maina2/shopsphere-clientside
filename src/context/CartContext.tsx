@@ -1,5 +1,6 @@
 import { createContext, useContext, useState, useEffect } from "react";
 import { getCart, addToCart, updateCartItem, removeFromCart, clearCart } from "../services/cartService";
+import { useAuth } from "../context/AuthContext"; // Import the AuthContext
 
 // Define the shape of our context
 interface CartContextType {
@@ -25,27 +26,43 @@ export const useCart = () => {
 // Cart Provider Component
 export const CartProvider = ({ children }: { children: React.ReactNode }) => {
   const [cart, setCart] = useState<any[]>([]);
+  const { user } = useAuth(); // Get the logged-in user from AuthContext
 
-  // Load cart from localStorage on mount
+  // Load cart from localStorage when the component mounts or the user changes
   useEffect(() => {
-    setCart(getCart());
-  }, []);
+    if (user) {
+      const userCart = getCart(user.id); // Fetch the user's cart
+      setCart(userCart);
+    } else {
+      setCart([]); // Clear the cart if the user is not logged in
+    }
+  }, [user]);
 
-  // Functions to manage cart
+  // Add an item to the cart
   const addItem = (product: any) => {
-    setCart(addToCart(product));
+    if (!user) return; // Exit if the user is not logged in
+    const updatedCart = addToCart(user.id, product); // Add item to the user's cart
+    setCart(updatedCart);
   };
 
+  // Update an item in the cart
   const updateItem = (productId: number, quantity: number) => {
-    setCart(updateCartItem(productId, quantity));
+    if (!user) return; // Exit if the user is not logged in
+    const updatedCart = updateCartItem(user.id, productId, quantity); // Update item in the user's cart
+    setCart(updatedCart);
   };
 
+  // Remove an item from the cart
   const removeItem = (productId: number) => {
-    setCart(removeFromCart(productId));
+    if (!user) return; // Exit if the user is not logged in
+    const updatedCart = removeFromCart(user.id, productId); // Remove item from the user's cart
+    setCart(updatedCart);
   };
 
+  // Clear the cart
   const clearCartItems = () => {
-    clearCart();
+    if (!user) return; // Exit if the user is not logged in
+    clearCart(user.id); // Clear the user's cart
     setCart([]);
   };
 

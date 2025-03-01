@@ -13,7 +13,7 @@ body {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background-color: #f0f4f8;
+    background: linear-gradient(135deg, #6a11cb, #2575fc);
   }
   
   /* Login Container */
@@ -83,7 +83,7 @@ body {
   /* Login Button */
   .login-button {
     padding: 12px;
-    background-color: #007bff;
+    background-color: #28a745;
     color: white;
     border: none;
     border-radius: 8px;
