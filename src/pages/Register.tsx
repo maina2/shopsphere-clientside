@@ -1,6 +1,6 @@
-import  { useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "../styles/register.css"; 
+import "../styles/register.css";
 import { useAuth } from "../context/AuthContext";
 
 const Register = () => {
@@ -12,10 +12,8 @@ const Register = () => {
   const [error, setError] = useState<string | null>(null);
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
-  const {registerUser}= useAuth()
+  const { registerUser } = useAuth();
   const navigate = useNavigate();
-
-
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -24,7 +22,7 @@ const Register = () => {
     setIsLoading(true);
 
     try {
-      await registerUser(first_name,last_name,username, email, password );
+      await registerUser(first_name, last_name, username, email, password);
       setSuccessMessage("Registration successful! Redirecting...");
       setTimeout(() => navigate("/login"), 1500);
     } catch (err: any) {
@@ -39,7 +37,7 @@ const Register = () => {
       <div className="auth-card">
         <div className="auth-header">
           <h2 className="auth-title">Join ShopSphere today!</h2>
-          <p className="auth-subtitle">Start your  shopping journey with us</p>
+          <p className="auth-subtitle">Start your shopping journey with us</p>
         </div>
 
         <form onSubmit={handleSubmit} className="auth-form">
@@ -57,11 +55,10 @@ const Register = () => {
                 type="text"
                 className="auth-input"
                 value={first_name}
-                onChange={(e)=>setFirstname(e.target.value)}
+                onChange={(e) => setFirstname(e.target.value)}
                 placeholder="John"
                 required
               />
-            
             </div>
 
             <div className="input-group">
@@ -71,11 +68,10 @@ const Register = () => {
                 type="text"
                 className="auth-input"
                 value={last_name}
-                onChange={(e)=>setLastname(e.target.value)}
+                onChange={(e) => setLastname(e.target.value)}
                 placeholder="Doe"
                 required
               />
-           
             </div>
           </div>
 
@@ -86,11 +82,10 @@ const Register = () => {
               type="text"
               className="auth-input"
               value={username}
-              onChange={(e)=>setUsername(e.target.value)}
+              onChange={(e) => setUsername(e.target.value)}
               placeholder="johndoe123"
               required
             />
-            
           </div>
 
           <div className="input-group">
@@ -100,11 +95,10 @@ const Register = () => {
               type="email"
               className="auth-input"
               value={email}
-              onChange={(e)=>setEmail(e.target.value)}
+              onChange={(e) => setEmail(e.target.value)}
               placeholder="john@example.com"
               required
             />
-            
           </div>
 
           <div className="input-group">
@@ -114,7 +108,7 @@ const Register = () => {
               type="password"
               className="auth-input"
               value={password}
-              onChange={(e)=>setPassword(e.target.value)}
+              onChange={(e) => setPassword(e.target.value)}
               placeholder="••••••••"
               required
             />

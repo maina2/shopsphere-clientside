@@ -1,127 +1,147 @@
-/* Global Styles */
 body {
-    font-family: 'Poppins', sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f0f4f8;
-    color: #333;
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f0f4f8;
+  color: #333;
+}
+
+/* Login Page Container */
+.login-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #6a11cb, #2575fc);
+  padding: 20px; /* Add padding for mobile */
+}
+
+/* Login Container */
+.login-container {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 30px 20px; /* Adjusted padding for better mobile responsiveness */
+  width: 100%;
+  max-width: 400px;
+  animation: fadeIn 0.5s ease-in-out;
+  box-sizing: border-box;
+}
+
+/* Login Title */
+.login-title {
+  font-size: 1.8rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #333;
+}
+
+/* Login Subtitle */
+.login-subtitle {
+  font-size: 0.9rem;
+  color: #666;
+  margin-bottom: 24px;
+}
+
+/* Login Form */
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Form Group */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-group label {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #444;
+}
+
+.form-group input {
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  transition: border-color 0.3s ease;
+}
+
+.form-group input:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+/* Login Button */
+.login-button {
+  padding: 12px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.login-button:hover {
+  background-color: #0056b3;
+}
+
+/* Register Link */
+.register-link {
+  font-size: 0.9rem;
+  color: #666;
+  margin-top: 16px;
+}
+
+.register-text {
+  color: #007bff;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.register-text:hover {
+  text-decoration: underline;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
   }
-  
-  /* Login Page Container */
-  .login-page {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    background: linear-gradient(135deg, #6a11cb, #2575fc);
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
-  
-  /* Login Container */
-  .login-container {
-    background: white;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    padding: 40px;
-    width: 100%;
-    max-width: 400px;
-    animation: fadeIn 0.5s ease-in-out;
-  }
-  
-  /* Login Card */
-  .login-card {
-    text-align: center;
-  }
-  
-  /* Login Title */
+}
+
+/* Media Queries for Mobile */
+@media (max-width: 600px) {
   .login-title {
-    font-size: 2rem;
-    font-weight: 600;
-    margin-bottom: 8px;
-    color: #333;
+    font-size: 1.5rem;
   }
-  
-  /* Login Subtitle */
-  .login-subtitle {
-    font-size: 0.9rem;
-    color: #666;
-    margin-bottom: 24px;
+
+  .login-container {
+    padding: 20px 15px; /* Adjust padding for smaller screens */
   }
-  
-  /* Login Form */
-  .login-form {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-  }
-  
-  /* Form Group */
-  .form-group {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-  }
-  
-  .form-group label {
-    font-size: 0.9rem;
-    font-weight: 500;
-    color: #444;
-  }
-  
-  .form-group input {
-    padding: 12px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    font-size: 0.9rem;
-    transition: border-color 0.3s ease;
-  }
-  
-  .form-group input:focus {
-    border-color: #007bff;
-    outline: none;
-  }
-  
-  /* Login Button */
+
   .login-button {
-    padding: 12px;
-    background-color: #28a745;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    font-size: 1rem;
-    font-weight: 500;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .login-button:hover {
-    background-color: #0056b3;
-  }
-  
-  /* Register Link */
-  .register-link {
     font-size: 0.9rem;
-    color: #666;
-    margin-top: 16px;
   }
-  
-  .register-text {
-    color: #007bff;
-    text-decoration: none;
-    font-weight: 500;
+
+  .register-link {
+    font-size: 0.8rem;
   }
-  
-  .register-text:hover {
-    text-decoration: underline;
+
+  .form-group input {
+    font-size: 0.85rem;
+    padding: 10px; /* Reduce padding on inputs for smaller screens */
   }
-  
-  /* Animations */
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-      transform: translateY(-20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
+}
