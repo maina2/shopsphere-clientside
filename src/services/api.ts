@@ -1,7 +1,7 @@
 import axios, { AxiosInstance, InternalAxiosRequestConfig, AxiosResponse } from 'axios';
 
 // API URL constant
-const API_URL: string = "http://localhost:8000";
+const API_URL: string = "https://shopsphere-api.onrender.com";
 
 // Type for public endpoints
 type PublicEndpoint = '/users/register/' | '/users/login/' | '/users/token/refresh/';

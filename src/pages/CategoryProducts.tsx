@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getProductByCategories } from "../services/categoriesService"; // Import the service
-import "../styles/categoryProducts.css"; // Import the CSS file
+import "../styles/categoryproducts.css"; // Import the CSS file
 import Navbar from '../components/Navbar';
 
 const CategoryProductsPage = () => {
